@@ -166,21 +166,7 @@
         
         <h2 style="text-align:center">Lightbox</h2>
         
-        <div class="row">
-          <div class="column">
-            <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
-          </div>
-          <div class="column">
-            <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
-          </div>
-          <div class="column">
-            <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
-          </div>
-          <div class="column">
-            <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
-          </div>
-        </div>
-        
+        <!--
         <div id="myModal" class="modal">
           <span class="close cursor" onclick="closeModal()">&times;</span>
           <div class="modal-content">
@@ -227,7 +213,9 @@
             </div>
           </div>
         </div>
+        -->
         <div id="demo"></div>
+        <div id="demo2"></div>
   <script>
         
         function openModal() {
@@ -237,7 +225,7 @@
         function closeModal() {
           document.getElementById("myModal").style.display = "none";
         }
-        
+        /*
         var slideIndex = 1;
         showSlides(slideIndex);
         
@@ -248,7 +236,7 @@
         function currentSlide(n) {
           showSlides(slideIndex = n);
         }
-        
+        /*
         function showSlides(n) {
           var i;
           var slides = document.getElementsByClassName("mySlides");
@@ -265,7 +253,7 @@
           slides[slideIndex-1].style.display = "block";
           dots[slideIndex-1].className += " active";
           captionText.innerHTML = dots[slideIndex-1].alt;
-        }
+        } */
   
 function displayImage (xImageArray) {
   let images = xImageArray;
@@ -295,39 +283,33 @@ function makeModal(xID, xImageArray) {
   let modalString = '';
   let modalContainer = '';
 
-  modalContainer = ``;
-}
-<div id="myModal" class="modal">
+  modalImages.forEach(addImages);
+
+  function addImages(item, index) {
+    modalString += 
+        `<div class="mySlides">
+          <div class="numbertext">${index + 1} / ${modalImages.length}</div>
+          <img src="${item}" style="width:100%">
+        </div>`;
+    }
+    modalContainer = 
+        `<div id="${modalID}" class="modal">
           <span class="close cursor" onclick="closeModal()">&times;</span>
-          <div class="modal-content">
-        
-            <div class="mySlides">
-              <div class="numbertext">1 / 4</div>
-              <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%">
-            </div>
-        
-            <div class="mySlides">
-              <div class="numbertext">2 / 4</div>
-              <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%">
-            </div>
-        
-            <div class="mySlides">
-              <div class="numbertext">3 / 4</div>
-              <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%">
-            </div>
-            
-            <div class="mySlides">
-              <div class="numbertext">4 / 4</div>
-              <img src="https://i.imgur.com/w9LfN8g.png" style="width:100%">
-            </div>
-            
+          <div class="modal-content"> 
+            ${modalString}
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        
             <div class="caption-container">
-              <p id="caption"></p>
+                <p id="caption"></p>
             </div>
-displayImage(['https://i.imgur.com/ajEEL5k.jpeg', 'https://i.imgur.com/SyNNnvC.jpeg', 'https://i.imgur.com/Phg7YYz.jpeg'])
+          </div>`;
+  document.getElementById('demo2').innerHTML = modalContainer;
+}
+        
+displayImage(['https://i.imgur.com/ajEEL5k.jpeg', 'https://i.imgur.com/SyNNnvC.jpeg', 'https://i.imgur.com/Phg7YYz.jpeg']);
+
+makeModal('myModal', ['https://i.imgur.com/ajEEL5k.jpeg', 'https://i.imgur.com/SyNNnvC.jpeg', 'https://i.imgur.com/Phg7YYz.jpeg']);
+
 
 </script>
 </body>
